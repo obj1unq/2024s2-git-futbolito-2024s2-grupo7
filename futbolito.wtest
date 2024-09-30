@@ -1,0 +1,8 @@
+import objetos.*
+import wollok.game.*
+
+describe "futbolito" {
+  test "inicio" {
+    
+  }
+}
