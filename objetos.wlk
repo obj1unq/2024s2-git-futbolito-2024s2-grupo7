@@ -3,8 +3,12 @@ import wollok.game.*
 object lionel {
 
 	var property position = game.at(3,5)
+
+	var property balon = pelota
+
 	var property camisetaPuesta = self.titular()
 	
+
 	
 	method image() {
 		return camisetaPuesta +".png"
@@ -18,6 +22,19 @@ object lionel {
 		position = game.at((game.width() - 1).min(position.x() + 1), position.y()) 
 	}
 
+
+	method validarPatear() {
+		if(not self.tengoLaPelota()){
+			self.error("Lionel no esta lo suficientemente cerca de la pelota")
+		}
+	}
+	
+
+	method patear() {
+		self.validarPatear()
+		balon.serPateada()
+	}
+}
 
 	method camiseta(){
 		self.validarCamiseta()
@@ -54,6 +71,7 @@ object lionel {
 	  pelota.serTaqueada()
 	}
 
+
 	method validarTaquito(){
 		if(not self.tengoLaPelota()){
 			self.error("no tengo la pelota")
@@ -67,9 +85,16 @@ object lionel {
 
 object pelota {
 	const property image="pelota.png"
+
+
+	method serPateada() {
+		position = game.at((game.width() - 1).min(position.x() + 3), position.y())
+	}
+
 	var property position = game.at(5,5)
 
 	method serTaqueada() {
 	  position = game.at(0.max(position.x() - 2), position.y())
 	}	
+
 }
